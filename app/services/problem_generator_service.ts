@@ -14,15 +14,36 @@ export class ProblemGeneratorService {
     }
   }
 
-  // --- WEEK 1 LOGIC (Example: Sum of random numbers) ---
-  private static generateWeek1() {
-    const numbers: number[] = []
-    for (let i = 0; i < 100; i++) {
-      numbers.push(Math.floor(Math.random() * 1000) + 1)
+  // --- WEEK 1 LOGIC ---
+private static generateWeek1() {
+    const N = 2000
+    const MAX_SCORE = 1000
+    const k = Math.floor(Math.random() * 95) + 5 
+
+    const capybaras: number[] = []
+    for (let i = 0; i < N; i++) {
+      capybaras.push(Math.floor(Math.random() * MAX_SCORE) + 1)
     }
 
-    const input = numbers.join('\n')
-    const solution = numbers.reduce((a, b) => a + b, 0).toString()
+    const sorted = [...capybaras].sort((a, b) => a - b)
+    
+    let left = 0
+    let maxGroupSize = 0
+
+    for (let right = 0; right < sorted.length; right++) {
+      while (sorted[right] - sorted[left] > k) {
+        left++
+      }
+
+      const currentSize = right - left + 1
+
+      if (currentSize >= 2) {
+        maxGroupSize = Math.max(maxGroupSize, currentSize)
+      }
+    }
+
+    const input = `${k}\n${capybaras.join(',')}`
+    const solution = maxGroupSize.toString()
 
     return { input, solution }
   }
