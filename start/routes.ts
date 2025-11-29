@@ -1,15 +1,9 @@
 import ProblemsController from '#controllers/problems_controller'
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
-router.get('/', async () => {
-  return {
-    hello: 'world',
-  }
-})
+router.group(() => {
+  router.post('/problem', [ProblemsController, 'getProblem'])
+  router.post('/submit', [ProblemsController, 'submitAnswer'])
 
-router.get('/health', async () => {
-  return { status: 'im healthy thx for asking :)' }
-})
-
-router.post('/problem', [ProblemsController, 'getProblem'])
-router.post('/submit', [ProblemsController, 'submitAnswer'])
+}).use(middleware.botAuth())
