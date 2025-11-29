@@ -1,15 +1,21 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class User extends BaseModel {
+export default class Problem extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare discordId: string
+  declare week: number
 
   @column()
-  declare username: string
+  declare title: string
+
+  @column()
+  declare description: string
+
+  @column()
+  declare inputExample: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
