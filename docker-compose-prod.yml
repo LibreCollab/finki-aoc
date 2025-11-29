@@ -1,0 +1,16 @@
+services:
+  app:
+    container_name: finki_aoc_prod
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3333:3333"
+    env_file:
+      - .env
+    volumes:
+      - sqlite_data:/app/tmp
+
+volumes:
+  sqlite_data:

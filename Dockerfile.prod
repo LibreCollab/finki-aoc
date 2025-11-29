@@ -1,0 +1,18 @@
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN node ace build
+
+FROM node:20-alpine AS production
+WORKDIR /app
+ENV NODE_ENV=production
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY --from=build /app/build ./build
+
+RUN mkdir -p /app/tmp && chown -R node:node /app/tmp
+
+EXPOSE 3333
+CMD ["node", "build/bin/server.js"]
