@@ -8,7 +8,8 @@ router.get('/', async () => {
 })
 
 router.get('/health', async () => {
-  return { status: 'im healthy' }
+  return { status: 'im healthy thx for asking :)' }
 })
 
 router.post('/problem', [ProblemsController, 'getProblem'])
+router.post('/submit', [ProblemsController, 'submitAnswer'])
