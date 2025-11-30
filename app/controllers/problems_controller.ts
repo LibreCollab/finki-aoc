@@ -19,7 +19,7 @@ export default class ProblemsController {
 
     const { isValid, week, message } = GameTimeService.getCurrentWeek()
     if (!isValid) {
-      return response.ok({ message })
+      return response.ok({ status: 'too_early', message: message })
     }
 
     const user = await User.updateOrCreate({ discordId: discord_id }, { username: username })
@@ -63,9 +63,9 @@ export default class ProblemsController {
       return response.badRequest({ error: 'Missing discord_id or answer' })
     }
 
-    const { isValid, week } = GameTimeService.getCurrentWeek()
+    const { isValid, week, message } = GameTimeService.getCurrentWeek()
     if (!isValid) {
-      return response.badRequest({ error: 'Competition is not active.' })
+      return response.ok({ status: 'too_early', message: message })
     }
 
     const user = await User.findBy('discord_id', discord_id)
@@ -130,7 +130,7 @@ export default class ProblemsController {
     const activeLeaderboard = formatted.filter((u) => u.total_score > 0)
 
     if (activeLeaderboard.length === 0) {
-      return response.ok({ message: 'Leaderboard is empty.', data: [] })
+      return response.ok({ data: [] })
     }
 
     return response.ok({ data: activeLeaderboard })
