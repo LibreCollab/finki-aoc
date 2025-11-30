@@ -1,11 +1,11 @@
 name: finki-aoc-dev
 
 services:
-  app:
+  aoc:
     restart: always
     build: .
     ports:
-      - '127.0.0.1:3333:3333'
+      - '3333:3333'
     env_file:
       - .env
     volumes:
