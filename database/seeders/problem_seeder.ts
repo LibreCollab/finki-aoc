@@ -24,7 +24,7 @@ Return the maximum number of capybaras that can attend a single valid picnic gro
       },
       {
         week: 2,
-        title: 'Week 2: Stella\'s Diary',
+        title: "Week 2: Stella's Diary",
         description: `Stella keeps a meticulous diary. Every day, she rates her "Vibe Score" as an integer (positive for great days, negative for terrible days).
 
 Stella wants to look back and find her "Golden Era". A "Golden Era" is defined as a contiguous sequence of days where the sum of Vibe Scores is maximized.
@@ -63,9 +63,28 @@ Result: 3`,
       },
       {
         week: 4,
-        title: 'Week 4: TODO',
-        description: 'Coming soon...',
-        inputExample: '...',
+        title: 'Week 4: The Phantom Building',
+        description: `It has been 10 years. The Dean claims the new FINKI building exists on a secret blueprint, hidden within a labyrinth of bureaucracy and construction fences.
+
+You have obtained a satellite scan of the supposed construction site represented as a 2D grid:
+- 'S' is your starting position (The Barracks).
+- 'E' is the entrance to the New Building.
+- '#' represents concrete walls or bureaucratic red tape (impassable).
+- '.' represents open ground.
+
+Input Format:
+The first line contains two integers: R (rows) and C (columns).
+The following R lines represent the grid.
+
+Your Task:
+Find the **minimum number of steps** to get from 'S' to 'E'.
+If the building is (as expected) a lie and cannot be reached, return -1.`,
+        inputExample: `5 5
+S..#.
+.#...
+...#.
+.##..
+...#E`,
       },
     ])
   }

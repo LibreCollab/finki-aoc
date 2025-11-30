@@ -2,7 +2,6 @@ import { test } from '@japa/runner'
 import { ProblemGeneratorService } from '#services/problem_generator_service'
 
 test.group('Problem Generator Service', () => {
-
   const ITERATIONS = 10
 
   /**
@@ -62,11 +61,13 @@ test.group('Problem Generator Service', () => {
   /**
    * WEEK 3: The Gossip Protocol (Graph / Connected Components)
    */
-  test('Week 3: Correctly identifies largest connected component (x10 iterations)', async ({ assert }) => {
+  test('Week 3: Correctly identifies largest connected component (x10 iterations)', async ({
+    assert,
+  }) => {
     for (let i = 0; i < ITERATIONS; i++) {
       const { input, solution } = ProblemGeneratorService.generate(3)
       const pairs = input.split(',')
-      
+
       const graph = new Map<number, number[]>()
       const allNodes = new Set<number>()
 
@@ -79,7 +80,7 @@ test.group('Problem Generator Service', () => {
         allNodes.add(v)
       }
 
-      pairs.forEach(pair => {
+      pairs.forEach((pair) => {
         const [u, v] = pair.split('-').map(Number)
         addEdge(u, v)
       })
@@ -114,4 +115,67 @@ test.group('Problem Generator Service', () => {
     }
   })
 
+  /**
+   * WEEK 4: The Phantom Building (Grid BFS)
+   */
+  test('Week 4: Correctly finds shortest path in grid (x10 iterations)', async ({ assert }) => {
+    for (let i = 0; i < ITERATIONS; i++) {
+      const { input, solution } = ProblemGeneratorService.generate(4)
+
+      const lines = input.split('\n')
+      const [dims, ...gridRows] = lines
+      const [R, C] = dims.split(' ').map(Number)
+
+      const grid = gridRows.map((line) => line.split(''))
+
+      let startR = 0,
+        startC = 0
+      for (let r = 0; r < R; r++) {
+        for (let c = 0; c < C; c++) {
+          if (grid[r][c] === 'S') {
+            startR = r
+            startC = c
+          }
+        }
+      }
+
+      const directions = [
+        [-1, 0],
+        [1, 0],
+        [0, -1],
+        [0, 1],
+      ]
+      const queue: [number, number, number][] = [[startR, startC, 0]]
+      const visited = new Set<string>()
+      visited.add(`${startR},${startC}`)
+
+      let oraclePath = -1
+
+      while (queue.length > 0) {
+        const [r, c, steps] = queue.shift()!
+
+        if (grid[r][c] === 'E') {
+          oraclePath = steps
+          break
+        }
+
+        for (const [dr, dc] of directions) {
+          const nr = r + dr
+          const nc = c + dc
+
+          if (nr >= 0 && nr < R && nc >= 0 && nc < C) {
+            const cell = grid[nr][nc]
+            const key = `${nr},${nc}`
+
+            if (cell !== '#' && !visited.has(key)) {
+              visited.add(key)
+              queue.push([nr, nc, steps + 1])
+            }
+          }
+        }
+      }
+
+      assert.equal(solution, oraclePath.toString(), `Iteration ${i + 1}: Failed Week 4`)
+    }
+  })
 })

@@ -6,8 +6,8 @@ export class GameTimeService {
    * Set IS_DEBUG to true to force a specific date.
    * Set IS_DEBUG to false to use the real server time.
    */
-  private static IS_DEBUG = false
-  private static DEBUG_DATE = '2025-12-05' // Simulates Week 1
+  private static IS_DEBUG = true
+  private static DEBUG_DATE = '2025-12-30' // Simulates Week 1
 
   private static getNow(): DateTime {
     if (this.IS_DEBUG) {
@@ -20,10 +20,10 @@ export class GameTimeService {
     const now = this.getNow()
 
     if (now.month !== 12) {
-      return { 
-        isValid: false, 
-        week: 0, 
-        message: 'There are no FINKI AoC problems at this time. See you in December!' 
+      return {
+        isValid: false,
+        week: 0,
+        message: 'There are no FINKI AoC problems at this time. See you in December!',
       }
     }
 
@@ -35,10 +35,10 @@ export class GameTimeService {
     else if (day >= 15 && day <= 21) week = 3
     else week = 4
 
-    return { 
-      isValid: true, 
-      week: week, 
-      message: null 
+    return {
+      isValid: true,
+      week: week,
+      message: null,
     }
   }
 }
