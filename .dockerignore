@@ -1,0 +1,16 @@
+node_modules
+build
+.git
+.gitignore
+*.md
+LICENSE
+.env*
+!.env.example
+.vscode
+.idea
+*.log
+tmp
+coverage
+.dockerignore
+Dockerfile
+compose.yaml

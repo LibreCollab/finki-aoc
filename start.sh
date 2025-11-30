@@ -1,6 +1,7 @@
 #!/bin/sh
+set -e
 
-mkdir -p /app/build
+mkdir -p /app/tmp
 ln -sfn /app/tmp /app/build/tmp
 
 echo "Running Migrations..."
@@ -10,4 +11,4 @@ echo "Running Seeders..."
 node build/ace.js db:seed
 
 echo "Starting Server..."
-node build/bin/server.js
+exec node build/bin/server.js

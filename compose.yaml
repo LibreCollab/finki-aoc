@@ -1,0 +1,15 @@
+name: finki-aoc-dev
+
+services:
+  app:
+    restart: always
+    build: .
+    ports:
+      - '127.0.0.1:3333:3333'
+    env_file:
+      - .env
+    volumes:
+      - sqlite_data:/app/tmp
+
+volumes:
+  sqlite_data:
