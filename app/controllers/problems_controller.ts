@@ -52,6 +52,7 @@ export default class ProblemsController {
             week: week,
             title: problem.title,
             description: problem.description,
+            input_example: problem.inputExample,
             user_input: state.inputData,
             is_solved: state.isSolved
         })
