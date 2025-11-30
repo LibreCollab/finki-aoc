@@ -103,7 +103,11 @@ export default class ProblemsController {
 
       return response.ok({
         status: 'correct',
-        message: `Correct! You ranked #${rank} and earned ${points} points.`,
+        message: `Correct! You ranked #${rank} and earned ${points} points.${
+          qualifiesForBonus
+            ? "\n\nPssst! You've qualified for the super secret bonus problem! Type `/aoc bonus` for more information."
+            : ''
+        }`,
         has_qualified_for_bonus: qualifiesForBonus,
       })
     } else {
@@ -115,15 +119,16 @@ export default class ProblemsController {
     const leaderboard = await db
       .from('users')
       .leftJoin('user_problem_states', 'users.id', 'user_problem_states.user_id')
-      .select('users.username')
+      .select('users.username', 'users.discord_id')
       .sum('user_problem_states.points as total_score')
-      .groupBy('users.id', 'users.username')
+      .groupBy('users.id', 'users.username', 'users.discord_id')
       .orderBy('total_score', 'desc')
       .limit(10)
 
     const formatted = leaderboard.map((entry, index) => ({
       rank: index + 1,
       username: entry.username,
+      discord_id: entry.discord_id,
       total_score: Number(entry.total_score || 0),
     }))
 
