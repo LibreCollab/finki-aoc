@@ -5,5 +5,5 @@ import { middleware } from './kernel.js'
 router.group(() => {
   router.post('/problem', [ProblemsController, 'getProblem'])
   router.post('/submit', [ProblemsController, 'submitAnswer'])
-
+  router.get('/leaderboard', [ProblemsController, 'getLeaderboard'])
 }).use(middleware.botAuth())

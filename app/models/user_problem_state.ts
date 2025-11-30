@@ -23,6 +23,12 @@ export default class UserProblemState extends BaseModel {
   @column()
   declare isSolved: boolean
 
+  @column()
+  declare points: number
+
+  @column.dateTime()
+  declare solvedAt: DateTime | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
