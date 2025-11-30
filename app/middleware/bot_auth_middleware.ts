@@ -10,8 +10,8 @@ export default class BotAuthMiddleware {
     const expectedToken = env.get('BOT_ACCESS_TOKEN')
 
     if (!authHeader || authHeader !== `Bearer ${expectedToken}`) {
-      return response.unauthorized({ 
-        error: 'Unauthorized. Invalid or missing access token.' 
+      return response.unauthorized({
+        error: 'Unauthorized. Invalid or missing access token.',
       })
     }
 

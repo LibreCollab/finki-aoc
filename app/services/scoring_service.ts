@@ -12,11 +12,11 @@ export class ScoringService {
       .count('* as total')
 
     const count = Number(solversCount[0].$extras.total || 0)
-    
+
     const rank = count + 1
 
     let points = 100 - (rank - 1)
-    
+
     if (points < 1) {
       points = 1
     }

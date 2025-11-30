@@ -18,5 +18,5 @@ export default await Env.create(new URL('../', import.meta.url), {
   HOST: Env.schema.string({ format: 'host' }),
   LOG_LEVEL: Env.schema.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']),
   BOT_ACCESS_TOKEN: Env.schema.string(),
-  LIMITER_STORE: Env.schema.enum(['database', 'memory'] as const)
+  LIMITER_STORE: Env.schema.enum(['database', 'memory'] as const),
 })
