@@ -20,7 +20,13 @@ The second line contains the list of friendliness scores separated by commas.
 Your Task:
 Return the maximum number of capybaras that can attend a single valid picnic group. If no valid group can be formed, return 0.`,
         inputExample: `2
-3,5,2,7,4`,
+3,5,2,7,4
+
+Explanation:
+Sorted scores: [2, 3, 4, 5, 7]
+Valid groups with diff <= 2: [2,3,4], [3,4,5], [5,7], etc.
+The largest group is [2, 3, 4] (size 3).
+Output: 3`,
       },
       {
         week: 2,
@@ -84,7 +90,11 @@ S..#.
 .#...
 ...#.
 .##..
-...#E`,
+...#E
+
+Explanation: 
+Path: (0,0) -> (0,1) -> (0,2) -> (1,2) -> (1,3) -> (1,4) -> (2,4) -> (3,4) -> (4,4)
+Result: 8`,
       },
       {
         week: 5,
