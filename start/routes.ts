@@ -9,6 +9,8 @@ router
       .group(() => {
         router.post('/problem', [ProblemsController, 'getProblem'])
         router.post('/submit', [ProblemsController, 'submitAnswer'])
+        router.post('/problem/bonus', [ProblemsController, 'getBonusProblem'])
+        router.post('/submit/bonus', [ProblemsController, 'submitBonusAnswer'])
       })
       .middleware([middleware.botAuth(), gameLimiter])
 

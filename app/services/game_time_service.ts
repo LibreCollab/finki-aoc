@@ -6,8 +6,8 @@ export class GameTimeService {
    * Set IS_DEBUG to true to force a specific date.
    * Set IS_DEBUG to false to use the real server time.
    */
-  private static IS_DEBUG = true
-  private static DEBUG_DATE = '2025-12-30' // Simulates Week 1
+  private static IS_DEBUG = false
+  private static DEBUG_DATE = '2025-12-01' // Simulates Week 1
 
   private static getNow(): DateTime {
     if (this.IS_DEBUG) {

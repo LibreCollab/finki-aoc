@@ -9,6 +9,8 @@ export class ProblemGeneratorService {
         return this.generateWeek3()
       case 4:
         return this.generateWeek4()
+      case 5:
+        return this.generateWeek5()
       default:
         throw new Error('Unknown week')
     }
@@ -230,5 +232,47 @@ export class ProblemGeneratorService {
     const input = `${inputHeader}\n${gridString}`
 
     return { input, solution: shortestPath.toString() }
+  }
+
+  private static generateWeek5() {
+    const fragments = [
+      {
+        // Fragment 1: The Conspiracy
+        // Target: "THE_BUILDING_IS_A_LIE"
+        // Logic: CAT( "THE_BUILDING_IS_", REV("EIL_A") )
+        // HEX("THE_BUILDING_IS_") -> 5448455f4255494c44494e475f49535f
+        // HEX("EIL_A") -> 45494c5f41
+        input: 'CAT(HEX(5448455f4255494c44494e475f49535f),REV(HEX(45494c5f41)))',
+        solution: 'THE_BUILDING_IS_A_LIE',
+      },
+      {
+        // Fragment 2: The Budget Allocation
+        // Target: "WE_BOUGHT_CAPYBARAS_AND_MECHANICAL_KEYBOARDS"
+        // Logic: CAT( "WE_BOUGHT_", REV("SARABYPAC"), "_AND_MECHANICAL_KEYBOARDS" )
+        // HEX("WE_BOUGHT_") -> 57455f424f554748545f
+        // HEX("SARABYPAC") -> 534152414259504143 (which is CAPYBARAS reversed)
+        // HEX("_AND_MECHANICAL_KEYBOARDS") -> 5f414e445f4d454348414e4943414c5f4b4559424f41524453
+        input:
+          'CAT(HEX(57455f424f554748545f),REV(HEX(534152414259504143)),HEX(5f414e445f4d454348414e4943414c5f4b4559424f41524453))',
+        solution: 'WE_BOUGHT_CAPYBARAS_AND_MECHANICAL_KEYBOARDS',
+      },
+      {
+        // Fragment 3: The Campus Cat
+        // Target: "MACO_SAYS_MEOW"
+        // Logic: CAT( "MACO_SAYS_", REV("WOEM") )
+        // HEX("MACO_SAYS_") -> 4d41434f5f534159535f
+        // HEX("WOEM") -> 574f454d (which is MEOW reversed)
+        input: 'CAT(HEX(4d41434f5f534159535f),REV(HEX(574f454d)))',
+        solution: 'MACO_SAYS_MEOW',
+      },
+    ]
+
+    const randomIndex = Math.floor(Math.random() * fragments.length)
+    const selected = fragments[randomIndex]
+
+    return {
+      input: selected.input,
+      solution: selected.solution,
+    }
   }
 }
