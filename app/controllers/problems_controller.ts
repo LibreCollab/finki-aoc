@@ -123,7 +123,7 @@ export default class ProblemsController {
       .sum('user_problem_states.points as total_score')
       .groupBy('users.id', 'users.username', 'users.discord_id')
       .orderBy('total_score', 'desc')
-      .limit(10)
+      .limit(100)
 
     const formatted = leaderboard.map((entry, index) => ({
       rank: index + 1,
